@@ -1,3 +1,5 @@
+use std::num;
+
 #[derive(Debug)]
 struct Person<'a> {
     name: &'a str,
@@ -47,4 +49,30 @@ pub fn run() {
     // Destructure the point
     let Point { x: my_x, y: my_y } = point;
     println!("my_x: {}, my_y: {}", my_x, my_y);
+
+    // Instantiate a unit struct
+    let _nil: Nil = Nil;
+
+    let _rectangle: Rectangle = Rectangle {
+        p1: Point { x: my_y, y: my_x },
+        p2: point,
+    };
+
+    println!("Area: {}", rect_area(&_rectangle));
+}
+// ! Activity
+
+fn rect_area(rect: &Rectangle) -> f32 {
+    let Rectangle {
+        p1: point_1,
+        p2: point_2,
+    } = rect;
+
+    println!(
+        "Received rect with p1: ({}, {}) and p2: ({}, {})",
+        point_1.x, point_1.y, point_2.x, point_2.y
+    );
+
+    let area: f32 = ((point_1.x - point_2.x) * (point_1.y - point_2.y)).abs();
+    area
 }
