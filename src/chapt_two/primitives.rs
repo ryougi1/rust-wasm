@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+/*
 pub fn run() {
     // Variables can be type annotated
     // Integers will default to i32, floats to f64
@@ -13,3 +15,4 @@ pub fn run() {
     // But they can be overwritten with shadowing
     let mutable = true;
 }
+*/

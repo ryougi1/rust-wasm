@@ -10,6 +10,8 @@ determined by the processor architecture eg 64 bits on an x86-64.
 Slices can be used to borrow a section of an array, and have the type signature &[T].
 */
 
+#![allow(dead_code)]
+
 use std::mem;
 
 //This function borrows a slice

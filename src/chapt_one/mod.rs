@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 mod formatting;
 mod hello_world;
 

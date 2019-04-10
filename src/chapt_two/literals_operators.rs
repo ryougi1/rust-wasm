@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 /*
 Integers, floats, characters, strings, booleans, and the unit type () can be expressed
 using literals.

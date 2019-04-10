@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 mod arrays_slices;
 mod literals_operators;
 mod primitives;

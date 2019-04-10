@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use std::fmt::{self, Display, Formatter};
 /*
 A tuple is a collection of values of different types.

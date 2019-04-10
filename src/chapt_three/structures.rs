@@ -1,4 +1,4 @@
-use std::num;
+#![allow(dead_code)]
 
 #[derive(Debug)]
 struct Person<'a> {
@@ -53,16 +53,21 @@ pub fn run() {
     // Instantiate a unit struct
     let _nil: Nil = Nil;
 
-    let _rectangle: Rectangle = Rectangle {
-        p1: Point { x: my_y, y: my_x },
-        p2: point,
-    };
-
-    println!("Area: {}", rect_area(&_rectangle));
+    println!("Area: {}", rect_area(&square(point, 0.3f32)));
 }
 // ! Activity
+fn square(p: Point, side: f32) -> Rectangle {
+    let new_p: Point = Point {
+        x: p.x + side,
+        y: p.y + side,
+    };
+
+    let rect: Rectangle = Rectangle { p1: p, p2: new_p };
+    rect
+}
 
 fn rect_area(rect: &Rectangle) -> f32 {
+    // Destruct
     let Rectangle {
         p1: point_1,
         p2: point_2,
@@ -73,6 +78,7 @@ fn rect_area(rect: &Rectangle) -> f32 {
         point_1.x, point_1.y, point_2.x, point_2.y
     );
 
+    // let area: f32 = ((rect.p1.x - rect.p2.x) * (rect.p1.y - rect.p2.y)).abs();
     let area: f32 = ((point_1.x - point_2.x) * (point_1.y - point_2.y)).abs();
     area
 }
