@@ -1,3 +1,4 @@
+#![allow(unused)]
 // ! if else
 /*
 Same as usual, but condition doesn't need to be surrounded by parentheses,
