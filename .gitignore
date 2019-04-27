@@ -1,2 +1,3 @@
-target
+/exercises/target
+/rust/target
 **/*.rs.bk
