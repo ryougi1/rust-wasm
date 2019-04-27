@@ -1,1 +1,0 @@
-/home/ryougi1/rust/exercices/target/debug/exercices: /home/ryougi1/rust/exercices/src/longest_word.rs /home/ryougi1/rust/exercices/src/main.rs /home/ryougi1/rust/exercices/src/rpn.rs /home/ryougi1/rust/exercices/src/tic_tac_toe/errors.rs /home/ryougi1/rust/exercices/src/tic_tac_toe.rs
