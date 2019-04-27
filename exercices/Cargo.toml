@@ -1,0 +1,7 @@
+[package]
+name = "exercices"
+version = "0.1.0"
+authors = ["ryougi1 <shplankey@live.se>"]
+edition = "2018"
+
+[dependencies]
