@@ -1,7 +1,0 @@
-[package]
-name = "rustlangdoc"
-version = "0.1.0"
-authors = ["jamesg"]
-edition = "2018"
-
-[dependencies]
