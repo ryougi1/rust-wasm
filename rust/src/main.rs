@@ -13,6 +13,7 @@
 // mod chapt_16;
 // mod chapt_18;
 // mod ch19_std_library_types;
+mod ch20_std_misc;
 
 fn main() {
     // chapt_one::run()
@@ -30,4 +31,5 @@ fn main() {
     // chapt_16::run();
     // chapt_18::run();
     // ch19_std_library_types::run();
+    ch20_std_misc::run();
 }
