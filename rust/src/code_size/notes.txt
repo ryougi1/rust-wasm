@@ -1,0 +1,28 @@
+https://rustwasm.github.io/docs/book/reference/code-size.html
+
+AVOID STRING FORMATTING
+Causes of bloats: format!, to_string, etc... If possible, use only static strings in release mode. 
+
+AVOID PANICKIMNG
+Panics may arise implicitly from many constructs, e.g. indexing a slice, divison by zero,
+unwrapping an option or resulting using unwrap(). 
+Indexing can be replaced with fallible my_slice.get(i) operations.
+Division can be replaced with checked_div calls. 
+Unwrapping can be made to process::abort() instead of panicking. 
+
+AVOID ALLOCATION OR SWITCH TO WEE_ALLOC
+wee_alloc is designed for situtations where you need some kind of allocator, 
+but do not need a particularly fast allocator, and will happily trade allocation 
+speed for smaller code sizes. (Currently only in nightly build?)
+
+USE TRAIT OBJECTS INSTEAD OF GENERIC TYPE PARAMETERS
+Creating generic functions that use type parameters like: 
+fn whatever<T: MyTrait>(t: T) { ... }
+will cause LLVM to create a new copy of the function for each T type 
+that the function is used with. This presents better optimization opportunities,
+but adds up in size. Can use trait objects instead of type parameters, like: 
+fn whatever(t: Box<MyTrait>) { ... }
+fn whatever(t: &MyTrait) { ... }
+to only create a single version of the function in the .wasm file. 
+
+

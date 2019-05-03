@@ -27,55 +27,26 @@ pub fn run() {
 
     // We will calculate the sum of all digits via a threaded map-reduce algorithm.
     // Each whitespace separated chunk will be handled in a different thread.
-    let mut data = "8696789773741647185329732705036495911861322575564723963297542624962850708562347018608519079606900147256393839796670710609417278323874766921952380795257888236525459303330302837584953271357440410488978857342978126992021643898087354880841372095653216278424637452589860345374828574668";
+    let data_raw = "8696789773741647185329732705036495911861322575564723963297542624962850708562347018608519079606900147256393839796670710609417278323874766921952380795257888236525459303330302837584953271357440410488978857342978126992021643898087354880841372095653216278424637452589860345374828574668";
     let mut count = 0;
-    while data.len() > NBRS_PER_CHUNK {
-        let (first, second) = data.split_at(NBRS_PER_CHUNK);
+    let mut data: &str = &data_raw.replace(" ", "");
+
+    while !data.is_empty() {
+        let smallest = std::cmp::min(data.len(), NBRS_PER_CHUNK);
+        let (first, second) = data.split_at(smallest);
         println!("data seg: {} is {}", count, first);
-        // Pref move this out to a function
+        let first_as_string = first.to_string(); // Source of pain
         children.push(thread::spawn(move || -> u32 {
-            let result: u32 = first
+            let result: u32 = first_as_string
                 .chars()
                 .map(|c| c.to_digit(10).expect("should be digit"))
                 .sum();
             println!("processed seg {}: result={}", count, result);
             result
         }));
-        // So I don't have to repeat myself as such:
-        if second.len() <= NBRS_PER_CHUNK {
-            children.push(thread::spawn(move || -> u32 {
-                let result: u32 = second
-                    .chars()
-                    .map(|c| c.to_digit(10).expect("should be digit"))
-                    .sum();
-                println!("processed seg {}: result={}", count, result);
-                result
-            }));
-        }
         data = second;
         count += 1;
     }
-
-    // for (i, data_segment) in data.split_whitespace().enumerate() {
-    //     println!("data segment {} is \"{}\"", i, data_segment);
-
-    //     // spawn() returns a handle to the new thread,
-    //     // which we MUST keep to access the returned value.
-    //     // 'move || -> u32':
-    //     // * takes no arguments ('||')
-    //     // * takes ownership of its captured variables ('move')
-    //     // * returns an unsigned 32-bit integer ('-> u32')
-    //     children.push(thread::spawn(move || -> u32 {
-    //         // Calculate the intermediate sum of this segment:
-    //         let result = data_segment
-    //             .chars()
-    //             .map(|c| c.to_digit(10).expect("should be a digit"))
-    //             .sum();
-    //         // println! locks stdout, so no text-interleaving occurs
-    //         println!("processed segment {}, result={}", i, result);
-    //         result
-    //     }));
-    // }
 
     // collect each thread's intermediate results into a new Vec
     let mut intermediate_sums = vec![];
